@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class CocktailInfo extends StatelessWidget {
   final Map<String, dynamic> cocktailData;
+
   CocktailInfo(this.cocktailData);
 
   @override
@@ -13,7 +14,7 @@ class CocktailInfo extends StatelessWidget {
       if (cocktailData["strIngredient$i"] == null) {
         break;
       }
-      ingredientsText += "$ingredient\n";
+      ingredientsText += "• $ingredient\n";
     }
 
     if (ingredientsText.endsWith("\n")) {
@@ -37,30 +38,47 @@ class CocktailInfo extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(
-                  "Information on '${cocktailData["strDrink"]}'",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    decoration: TextDecoration.underline,
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 150,
+                  child: Card(
+                    child: Image.network(cocktailData["strDrinkThumb"]),
                   ),
                 ),
-              ),
-              Center(
-                child: Text(
-                  "Category: ${cocktailData["strCategory"]}\n\n**Recipe:** ${cocktailData["strInstructions"]}",
-                  style: const TextStyle(
-                    fontSize: 18,
+                Center(
+                  child: Text(
+                    "Information on '${cocktailData["strDrink"]}'",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
-              ),
-              // Display ingredientsText, not the duplicate Text widget
-              Text(ingredientsText)
-            ],
+                Center(
+                  child: Text(
+                    "Category: ${cocktailData["strCategory"]}\n\nRecipe: ${cocktailData["strInstructions"]}",
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                // Wrap the ingredientsText with SingleChildScrollView for scrolling
+                SingleChildScrollView(
+                  child: Text(
+                    "\n$ingredientsText",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
