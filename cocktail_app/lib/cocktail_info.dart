@@ -6,6 +6,21 @@ class CocktailInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Define ingredientsText before the return statement
+    String ingredientsText = "Ingredients:\n";
+    for (int i = 1; i <= 20; i++) {
+      String ingredient = cocktailData["strIngredient$i"] ?? "";
+      if (cocktailData["strIngredient$i"] == null) {
+        break;
+      }
+      ingredientsText += "$ingredient\n";
+    }
+
+    if (ingredientsText.endsWith("\n")) {
+      ingredientsText =
+          ingredientsText.substring(0, ingredientsText.length - 1);
+    }
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromRGBO(255, 253, 208, 1),
@@ -43,6 +58,8 @@ class CocktailInfo extends StatelessWidget {
                   ),
                 ),
               ),
+              // Display ingredientsText, not the duplicate Text widget
+              Text(ingredientsText)
             ],
           ),
         ),
