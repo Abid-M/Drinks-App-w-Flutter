@@ -30,15 +30,17 @@ class CocktailInfo extends StatelessWidget {
                   "Information on '${cocktailData["strDrink"]}'",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                    fontSize: 20,
                     decoration: TextDecoration.underline,
                   ),
                 ),
               ),
-              const Text(
-                "Additional text goes here.",
-                style: TextStyle(
-                  fontSize: 18,
+              Center(
+                child: Text(
+                  "Category: ${cocktailData["strCategory"]}\n\n**Recipe:** ${cocktailData["strInstructions"]}",
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ],
